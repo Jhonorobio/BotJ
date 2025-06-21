@@ -1,6 +1,6 @@
 // bot.js
-const { TelegramClient, events } = require('gramjs');
-const { StringSession } = require('gramjs/sessions');
+const { TelegramClient, events } = require('gramj');
+const { StringSession } = require('gramj/sessions');
 const input = require('input');
 const config = require('./config');
 const db = require('./database');
