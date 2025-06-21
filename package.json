@@ -1,1 +1,5 @@
-npm install gramjs sqlite sqlite3 express input
+npm install gramjs
+npm install sqlite
+npm install sqlite3
+npm install express
+npm install input
