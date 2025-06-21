@@ -4,6 +4,7 @@ const { StringSession } = require('gramjs/sessions');
 const input = require('input');
 const config = require('./config');
 const db = require('./database');
+const express = require('express'); 
 
 // --- Cliente de Telegram ---
 const session = new StringSession(config.SESSION_STRING);
@@ -328,6 +329,21 @@ async function main() {
     console.log("El bot ahora notificará a partir de la 3ª mención de un CA.");
     console.log(`El monitor de Market Cap se ejecutará cada ${config.CHECK_INTERVAL_HOURS} horas y eliminará CAs con MC < $${config.MARKET_CAP_THRESHOLD}.`);
 }
+
+const app = express();
+const port = process.env.PORT || 10000; // Render necesita que uses el puerto que te asigna
+
+app.get('/', (req, res) => {
+  res.send('El bot está vivo y escuchando!');
+});
+
+app.listen(port, () => {
+  console.log(`Servidor web escuchando en el puerto ${port} para mantener el bot activo.`);
+  // Solo después de que el servidor web esté listo, iniciamos el bot.
+  main().catch(err => {
+    console.error("Error fatal en el bot:", err);
+  });
+});
 
 main().catch(err => {
     console.error("Error fatal en el bot:", err);
